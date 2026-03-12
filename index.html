@@ -59,13 +59,15 @@
         }
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
         .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .nav-links a:hover { color: var(--accent); }
 
         .controls { display: flex; gap: 10px; }
         .theme-toggle, .lang-btn {
             background: var(--card-bg); color: var(--text); border: 1px solid var(--border);
-            padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700;
+            padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; transition: var(--transition);
         }
+        .theme-toggle:hover, .lang-btn:hover { background: var(--accent); color: white; }
 
         /* --- SECCIONS --- */
         .hero { padding: 100px 8% 60px; text-align: center; }
@@ -82,6 +84,7 @@
         .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .project-img { width: 100%; height: 200px; object-fit: cover; }
         .project-info { padding: 20px; }
+        .project-info h3 { font-size: 1.1rem; }
 
         /* --- MODAL (ESTIL INSTAGRAM) --- */
         .modal-overlay {
@@ -93,21 +96,28 @@
             background: var(--bg); width: 90%; max-width: 800px; border-radius: 20px;
             overflow: hidden; display: flex; flex-direction: column; 
             box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: reveal 0.4s ease;
+            position: relative;
         }
-        .modal-img { width: 100%; max-height: 500px; object-fit: cover; }
+        .modal-img { width: 100%; max-height: 500px; object-fit: cover; border-bottom: 1px solid var(--border); }
         .modal-body { padding: 30px; }
         .close-modal { 
-            position: absolute; top: 20px; right: 20px; font-size: 2rem; 
-            color: var(--primary); cursor: pointer; font-weight: bold;
+            position: absolute; top: 15px; right: 20px; font-size: 2.2rem; 
+            color: white; cursor: pointer; font-weight: bold; z-index: 2001;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
         .email-link {
             display: inline-block; padding: 12px 25px; background: var(--accent);
-            color: white !important; text-decoration: none; border-radius: 10px; font-weight: 700;
+            color: white !important; text-decoration: none; border-radius: 10px; font-weight: 700; transition: var(--transition);
         }
+        .email-link:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        footer { text-align: center; padding: 40px; }
+        footer { text-align: center; padding: 40px; color: var(--text-light); }
 
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Opcional: podrías añadir un menú hamburguesa */
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -129,7 +139,7 @@
 </nav>
 
 <header class="hero">
-    <h1>Pau Izquierdo</h1>
+    <h1 id="hero-title">Pau Izquierdo</h1>
     <p id="hero-desc">Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.</p>
 </header>
 
@@ -142,20 +152,29 @@
 </section>
 
 <section id="proyectos" class="hidden" style="margin: 0 8% 40px;">
-    <h2 id="proj-title" style="text-align: center; font-size: 2rem;">Els meus Projectes</h2>
+    <h2 id="proj-title" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">Els meus Projectes</h2>
     <div class="projects-grid">
+        
+        <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-44-47.png', 'Windows 95 Desktop', 'Recreació o gestió d\'un escriptori clàssic de Windows 95 amb funcionalitats retro.')">
+            <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-44-47.png" class="project-img">
+            <div class="project-info"><h3>Windows 95 Desktop</h3></div>
+        </div>
+
         <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-10%2012-11-38.png', 'Navidrome', 'Servidor de música personal auto-allotjat.')">
             <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-10%2012-11-38.png" class="project-img">
             <div class="project-info"><h3>Navidrome</h3></div>
         </div>
+
         <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png', 'Calculadora', 'Una calculadora funcional amb estètica retro.')">
             <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png" class="project-img">
             <div class="project-info"><h3>Calculadora</h3></div>
         </div>
-        <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-23.png', 'Generador', 'Generador de contrasenyes segures estil terminal.')">
+
+        <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-23.png', 'Pass Generator', 'Generador de contrasenyes segures estil terminal.')">
             <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-23.png" class="project-img">
             <div class="project-info"><h3>Pass Generator</h3></div>
         </div>
+
         <div class="project-card" onclick="openModal('https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-06.png', 'Rellotge Retro', 'Rellotge digital amb disseny vintage minimalista.')">
             <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-06.png" class="project-img">
             <div class="project-info"><h3>Rellotge Retro</h3></div>
@@ -172,12 +191,12 @@
 </section>
 
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal" onclick="closeModal()">&times;</span>
     <div class="modal-content" onclick="event.stopPropagation()">
         <img id="modal-img" src="" class="modal-img">
         <div class="modal-body">
-            <h3 id="modal-title" style="margin-bottom: 10px;"></h3>
-            <p id="modal-desc"></p>
+            <h3 id="modal-title" style="margin-bottom: 10px; color: var(--primary);"></h3>
+            <p id="modal-desc" style="color: var(--text-light);"></p>
         </div>
     </div>
 </div>
@@ -207,7 +226,7 @@
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-desc').innerText = desc;
         document.getElementById('modal-overlay').style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Evita scroll
+        document.body.style.overflow = 'hidden'; 
     }
 
     function closeModal() {
@@ -221,12 +240,14 @@
         ca: {
             "nav-home": "Inici", "nav-projects": "Projectes", "nav-about": "Sobre mi", "nav-contact": "Contacta",
             "hero-desc": "Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.",
-            "about-title": "Sobre mi", "proj-title": "Els meus Projectes", "contact-title": "Contacta"
+            "about-title": "Sobre mi", "proj-title": "Els meus Projectes", "contact-title": "Contacta",
+            "contact-text": "Escriu-me per a qualsevol proposta de feina o col·laboració."
         },
         es: {
             "nav-home": "Inicio", "nav-projects": "Proyectos", "nav-about": "Sobre mí", "nav-contact": "Contacta",
             "hero-desc": "Estudiante de 2º de SMR en el Instituto Lacetània & Entusiasta del Hardware.",
-            "about-title": "Sobre mí", "proj-title": "Mis Proyectos", "contact-title": "Contacta"
+            "about-title": "Sobre mí", "proj-title": "Mis Proyectos", "contact-title": "Contacta",
+            "contact-text": "Escríbeme para cualquier propuesta de trabajo o colaboración."
         }
     };
 
@@ -238,17 +259,20 @@
         document.getElementById('about-title').innerText = t["about-title"];
         document.getElementById('proj-title').innerText = t["proj-title"];
         document.getElementById('contact-title').innerText = t["contact-title"];
+        document.getElementById('contact-text').innerText = t["contact-text"];
     }
 
     function showSection(sectionId) {
         ['sobre-mi', 'proyectos', 'contacta'].forEach(id => {
-            document.getElementById(id).classList.add('hidden');
-            document.getElementById(id).classList.remove('fade-in');
+            const el = document.getElementById(id);
+            el.classList.add('hidden');
+            el.classList.remove('fade-in');
         });
         if (sectionId === 'inicio') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
         const target = document.getElementById(sectionId);
         target.classList.remove('hidden');
         setTimeout(() => target.classList.add('fade-in'), 20);
+        target.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
