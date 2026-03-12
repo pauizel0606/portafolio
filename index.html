@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pau Izquierdo | IT & Marketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Pau Izquierdo | Portafoli IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0f172a;
@@ -13,7 +13,7 @@
             --card-bg: #f8fafc;
             --text: #1e293b;
             --text-light: #64748b;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,14 +24,16 @@
             color: var(--text);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- ANIMACIONS MILLORADES --- */
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
-        .fade-in { animation: fadeInUp 0.6s ease forwards; }
+        .fade-in { animation: reveal 0.8s var(--transition) forwards; }
         .hidden { display: none !important; }
 
         /* --- NAVEGACIÓ --- */
@@ -39,18 +41,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 8%;
-            background: white;
+            padding: 1rem 8%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
-        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); cursor: pointer; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: var(--transition); cursor: pointer; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--accent); }
+
+        /* Botó Idioma */
+        .lang-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        .lang-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 140px 8% 100px;
+            text-align: center;
+            background: radial-gradient(circle at top right, #f1f5f9, #ffffff);
+        }
+        .hero h1 { font-size: 3.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
+        .hero p { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto; }
 
         /* --- DROPDOWN --- */
         .dropdown { position: relative; }
@@ -58,53 +85,64 @@
             display: none;
             position: absolute;
             background: white;
-            min-width: 220px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            min-width: 240px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
             top: 100%;
-            padding: 0.5rem 0;
+            padding: 0.5rem;
             border: 1px solid #f1f5f9;
         }
-        .dropdown-content a { padding: 12px 20px; display: block; font-size: 0.9rem; }
-        .dropdown-content a:hover { background: #f1f5f9; color: var(--accent); }
+        .dropdown-content a { padding: 10px 15px; display: block; border-radius: 8px; }
+        .dropdown-content a:hover { background: var(--card-bg); color: var(--accent); }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* --- HERO --- */
-        .hero {
-            padding: 120px 8% 80px;
-            text-align: center;
-            background: radial-gradient(circle at top right, #f1f5f9, #ffffff);
-        }
-        .hero h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; }
-
         /* --- SECCIONS --- */
-        .about-section { padding: 60px 8%; background: var(--card-bg); border-radius: 30px; margin: 40px 8%; }
-        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .about-section { padding: 80px 8%; background: var(--card-bg); border-radius: 40px; margin: 40px 8%; }
+        .container { max-width: 1100px; margin: 0 auto; }
         
-        .experience-section { padding: 40px 8% 60px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .job-card { background: var(--card-bg); border-radius: 20px; padding: 40px; margin-bottom: 30px; border-left: 6px solid var(--accent); }
+        .experience-section { padding: 40px 8% 80px; }
+        .job-card { 
+            background: white; 
+            border-radius: 24px; 
+            padding: 40px; 
+            margin-bottom: 30px; 
+            border: 1px solid #f1f5f9; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
 
-        .projects-section { padding: 60px 8% 100px; background: #fff; }
-        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .projects-section { padding: 80px 8% 120px; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 50px; font-weight: 800; }
+        
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
         
         .project-card { 
-            border: 1px solid #f1f5f9; 
-            border-radius: 15px; 
+            border-radius: 20px; 
             overflow: hidden; 
             background: white; 
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
+            border: 1px solid #f1f5f9;
         }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .project-img { width: 100%; height: 200px; object-fit: cover; }
-        .project-info { padding: 20px; flex-grow: 1; }
+        .project-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12); 
+        }
+        
+        .project-img { width: 100%; height: 220px; object-fit: cover; }
+        .project-info { padding: 25px; }
+        .project-tag { color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
 
-        footer { text-align: center; padding: 60px; color: var(--text-light); border-top: 1px solid #f1f5f9; }
+        footer { text-align: center; padding: 80px; color: var(--text-light); border-top: 1px solid #f1f5f9; font-weight: 500; }
 
-        @media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { padding: 1rem 5%; }
+            .nav-links { gap: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -112,86 +150,156 @@
 <nav>
     <div class="logo">PAU IZQUIERDO</div>
     <ul class="nav-links">
-        <li><a onclick="showSection('inicio')">Inici</a></li>
+        <li><a onclick="showSection('inicio')" data-key="nav-home">Inici</a></li>
         <li class="dropdown">
-            <a onclick="showSection('proyectos')">Projectes ▾</a>
+            <a onclick="showSection('proyectos')" data-key="nav-projects">Projectes ▾</a>
             <div class="dropdown-content">
                 <a onclick="showSection('proyectos', 'navidrome')">Servidor Navidrome</a>
                 <a onclick="showSection('proyectos', 'calculadora')">Calculadora Retro</a>
-                <a onclick="showSection('proyectos')">Hardware</a>
+                <a onclick="showSection('proyectos', 'pass-gen')">Generador Contrassenyes</a>
+                <a onclick="showSection('proyectos', 'rellotge')">Rellotge Retro</a>
             </div>
         </li>
-        <li><a onclick="showSection('sobre-mi')">Sobre mi</a></li>
-        <li><a href="#">Contacte</a></li>
+        <li><a onclick="showSection('sobre-mi')" data-key="nav-about">Sobre mi</a></li>
+        <li><button class="lang-btn" onclick="toggleLanguage()">ES / CA</button></li>
     </ul>
 </nav>
 
 <header class="hero" id="hero-section">
-    <h1>Pau Izquierdo</h1>
-    <p>Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.</p>
+    <h1 id="hero-title">Pau Izquierdo</h1>
+    <p id="hero-desc">Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.</p>
 </header>
 
 <section id="sobre-mi" class="about-section hidden">
-    <div class="about-content">
-        <h2>Sobre mi</h2>
-        <p>Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.</p>
-        <p>Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>.</p>
+    <div class="container" style="text-align: center;">
+        <h2 id="about-title" style="font-size: 2.5rem; margin-bottom: 20px;">Sobre mi</h2>
+        <p id="about-text1">Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.</p>
+        <p id="about-text2">Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>.</p>
     </div>
 </section>
 
 <section id="experiencia" class="experience-section hidden">
     <div class="container">
-        <h2 style="text-align: center; margin-bottom: 30px;">Experiència Professional</h2>
+        <h2 id="exp-title" style="text-align: center; margin-bottom: 40px; font-size: 2rem;">Experiència Professional</h2>
         <div class="job-card">
             <h3>Kouten</h3>
-            <p>Manteniment preventiu i correctiu d'infraestructures tecnològiques i xarxes locals.</p>
+            <p id="exp-kouten">Manteniment preventiu i correctiu d'infraestructures tecnològiques i xarxes locals.</p>
         </div>
-        <div class="job-card" style="border-left-color: #64748b;">
+        <div class="job-card">
             <h3>Ocasionagestio</h3>
-            <p>Gestió administrativa i suport en tasques de marketing digital.</p>
+            <p id="exp-ocasio">Gestió administrativa i suport en tasques de marketing digital.</p>
         </div>
     </div>
 </section>
 
 <section id="proyectos" class="projects-section hidden">
     <div class="container">
-        <h2 class="section-title">Projectes Destacats</h2>
+        <h2 class="section-title" id="proj-title">Projectes Destacats</h2>
         <div class="projects-grid">
+            
             <div class="project-card" id="navidrome">
-                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-10%2012-11-38.png" alt="Navidrome" class="project-img">
+                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-10%2012-11-38.png" class="project-img">
                 <div class="project-info">
-                    <span style="color: var(--accent); font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 1</span>
-                    <h3>Servidor Navidrome</h3>
-                    <p>Implementació d'un servidor de streaming musical auto-allotjat.</p>
+                    <span class="project-tag">Streaming</span>
+                    <h3>Navidrome Music Server</h3>
+                    <p id="p1-desc">Servidor de música auto-allotjat per a biblioteques personals.</p>
                 </div>
             </div>
 
             <div class="project-card" id="calculadora">
-                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png" alt="Calculadora Retro" class="project-img">
+                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png" class="project-img">
                 <div class="project-info">
-                    <span style="color: var(--accent); font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 2</span>
-                    <h3>Calculadora Retro</h3>
-                    <p>Disseny i desenvolupament d'una calculadora amb estètica clàssica i funcionalitats modernes.</p>
+                    <span class="project-tag">Development</span>
+                    <h3 id="p2-name">Calculadora Retro</h3>
+                    <p id="p2-desc">Calculadora funcional amb una interfície inspirada en els anys 80.</p>
                 </div>
             </div>
-            
-            <div class="project-card">
-                <div style="height: 200px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Properament</div>
+
+            <div class="project-card" id="pass-gen">
+                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-23.png" class="project-img">
                 <div class="project-info">
-                    <span style="color: #94a3b8; font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 3</span>
-                    <h3>En desenvolupament</h3>
-                    <p>Nou projecte tècnic en procés.</p>
+                    <span class="project-tag">Security</span>
+                    <h3 id="p3-name">Generador de Contrassenyes</h3>
+                    <p id="p3-desc">Eina per crear claus segures amb estètica de terminal clàssica.</p>
                 </div>
             </div>
+
+            <div class="project-card" id="rellotge">
+                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2009-12-06.png" class="project-img">
+                <div class="project-info">
+                    <span class="project-tag">Tools</span>
+                    <h3 id="p4-name">Rellotge Retro</h3>
+                    <p id="p4-desc">Rellotge digital de precisió amb un disseny vintage minimalista.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Pau Izquierdo. Dissenyat amb enfocament en IT & Xarxes.</p>
+    <p>&copy; 2026 Pau Izquierdo | Built with Focus on IT.</p>
 </footer>
 
 <script>
+    // SISTEMA DE IDIOMES
+    let currentLang = 'ca';
+    const translations = {
+        ca: {
+            "nav-home": "Inici", "nav-projects": "Projectes ▾", "nav-about": "Sobre mi",
+            "hero-desc": "Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.",
+            "about-title": "Sobre mi",
+            "about-text1": "Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.",
+            "about-text2": "Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>.",
+            "exp-title": "Experiència Professional",
+            "exp-kouten": "Manteniment preventiu i correctiu d'infraestructures tecnològiques i xarxes locals.",
+            "exp-ocasio": "Gestió administrativa i suport en tasques de marketing digital.",
+            "proj-title": "Projectes Destacats",
+            "p1-desc": "Servidor de música auto-allotjat per a biblioteques personals.",
+            "p2-name": "Calculadora Retro", "p2-desc": "Calculadora funcional amb una interfície inspirada en els anys 80.",
+            "p3-name": "Generador de Contrassenyes", "p3-desc": "Eina per crear claus segures amb estètica de terminal clàssica.",
+            "p4-name": "Rellotge Retro", "p4-desc": "Rellotge digital de precisió amb un disseny vintage minimalista."
+        },
+        es: {
+            "nav-home": "Inicio", "nav-projects": "Proyectos ▾", "nav-about": "Sobre mí",
+            "hero-desc": "Estudiante de 2º de SMR en el Instituto Lacetània & Entusiasta del Hardware.",
+            "about-title": "Sobre mí",
+            "about-text1": "¡Hola! Me llamo <strong>Pau Izquierdo</strong> y actualmente estoy cursando el segundo año del ciclo de <strong>Sistemas Microinformáticos y Redes (SMR) en el Instituto Lacetània</strong>.",
+            "about-text2": "Tengo una gran pasión por el mundo de la tecnología y se me da especialmente bien todo lo relacionado con el <strong>hardware</strong> y la <strong>gestión de redes</strong>.",
+            "exp-title": "Experiencia Profesional",
+            "exp-kouten": "Mantenimiento preventivo y correctivo de infraestructuras tecnológicas y redes locales.",
+            "exp-ocasio": "Gestión administrativa y soporte en tareas de marketing digital.",
+            "proj-title": "Proyectos Destacados",
+            "p1-desc": "Servidor de música auto-alojado para bibliotecas personales.",
+            "p2-name": "Calculadora Retro", "p2-desc": "Calculadora funcional con una interfaz inspirada en los años 80.",
+            "p3-name": "Generador de Contraseñas", "p3-desc": "Herramienta para crear claves seguras con estética de terminal clásica.",
+            "p4-name": "Reloj Retro", "p4-desc": "Reloj digital de precisión con un diseño vintage minimalista."
+        }
+    };
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'ca' ? 'es' : 'ca';
+        const t = translations[currentLang];
+        
+        document.querySelectorAll('[data-key]').forEach(el => el.innerText = t[el.getAttribute('data-key')]);
+        document.getElementById('hero-desc').innerText = t["hero-desc"];
+        document.getElementById('about-title').innerText = t["about-title"];
+        document.getElementById('about-text1').innerHTML = t["about-text1"];
+        document.getElementById('about-text2').innerHTML = t["about-text2"];
+        document.getElementById('exp-title').innerText = t["exp-title"];
+        document.getElementById('exp-kouten').innerText = t["exp-kouten"];
+        document.getElementById('exp-ocasio').innerText = t["exp-ocasio"];
+        document.getElementById('proj-title').innerText = t["proj-title"];
+        document.getElementById('p1-desc').innerText = t["p1-desc"];
+        document.getElementById('p2-name').innerText = t["p2-name"];
+        document.getElementById('p2-desc').innerText = t["p2-desc"];
+        document.getElementById('p3-name').innerText = t["p3-name"];
+        document.getElementById('p3-desc').innerText = t["p3-desc"];
+        document.getElementById('p4-name').innerText = t["p4-name"];
+        document.getElementById('p4-desc').innerText = t["p4-desc"];
+    }
+
+    // GESTIÓ DE SECCIONS
     function showSection(sectionId, subId = null) {
         const sections = ['sobre-mi', 'proyectos', 'experiencia'];
         
@@ -209,7 +317,7 @@
         const target = document.getElementById(sectionId);
         if (target) {
             target.classList.remove('hidden');
-            setTimeout(() => { target.classList.add('fade-in'); }, 10);
+            setTimeout(() => { target.classList.add('fade-in'); }, 20);
 
             if(sectionId === 'sobre-mi') {
                 const exp = document.getElementById('experiencia');
@@ -221,7 +329,7 @@
                 setTimeout(() => {
                     const subTarget = document.getElementById(subId);
                     subTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 150);
+                }, 200);
             } else {
                 target.scrollIntoView({ behavior: 'smooth' });
             }
