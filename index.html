@@ -56,7 +56,6 @@
         .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: var(--transition); cursor: pointer; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Botó Idioma */
         .lang-btn {
             background: var(--primary);
             color: white;
@@ -97,7 +96,7 @@
         .dropdown:hover .dropdown-content { display: block; }
 
         /* --- SECCIONS --- */
-        .about-section { padding: 80px 8%; background: var(--card-bg); border-radius: 40px; margin: 40px 8%; }
+        .about-section, .contact-section { padding: 80px 8%; background: var(--card-bg); border-radius: 40px; margin: 40px 8%; }
         .container { max-width: 1100px; margin: 0 auto; }
         
         .experience-section { padding: 40px 8% 80px; }
@@ -136,6 +135,29 @@
         .project-info { padding: 25px; }
         .project-tag { color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
 
+        /* --- CONTACTA --- */
+        .contact-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #f1f5f9;
+        }
+        .email-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+        .email-link:hover { transform: scale(1.05); background: var(--primary); }
+
         footer { text-align: center; padding: 80px; color: var(--text-light); border-top: 1px solid #f1f5f9; font-weight: 500; }
 
         @media (max-width: 768px) {
@@ -155,12 +177,13 @@
             <a onclick="showSection('proyectos')" data-key="nav-projects">Projectes ▾</a>
             <div class="dropdown-content">
                 <a onclick="showSection('proyectos', 'navidrome')">Servidor Navidrome</a>
-                <a onclick="showSection('proyectos', 'calculadora')">Calculadora Retro</a>
+                <a onclick="showSection('proyectos', 'calculadora')">Calculadora</a>
                 <a onclick="showSection('proyectos', 'pass-gen')">Generador Contrassenyes</a>
                 <a onclick="showSection('proyectos', 'rellotge')">Rellotge Retro</a>
             </div>
         </li>
         <li><a onclick="showSection('sobre-mi')" data-key="nav-about">Sobre mi</a></li>
+        <li><a onclick="showSection('contacta')" data-key="nav-contact">Contacta</a></li>
         <li><button class="lang-btn" onclick="toggleLanguage()">ES / CA</button></li>
     </ul>
 </nav>
@@ -210,7 +233,7 @@
                 <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png" class="project-img">
                 <div class="project-info">
                     <span class="project-tag">Development</span>
-                    <h3 id="p2-name">Calculadora Retro</h3>
+                    <h3 id="p2-name">Calculadora</h3>
                     <p id="p2-desc">Calculadora funcional amb una interfície inspirada en els anys 80.</p>
                 </div>
             </div>
@@ -237,16 +260,25 @@
     </div>
 </section>
 
+<section id="contacta" class="contact-section hidden">
+    <div class="container">
+        <h2 id="contact-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 30px;">Contacta</h2>
+        <div class="contact-card">
+            <p id="contact-text">Si tens alguna proposta o vols parlar sobre algun projecte, no dubtis a escriure'm.</p>
+            <a href="mailto:pauizel0606@gmail.com" class="email-link">pauizel0606@gmail.com</a>
+        </div>
+    </div>
+</section>
+
 <footer>
     <p>&copy; 2026 Pau Izquierdo | Built with Focus on IT.</p>
 </footer>
 
 <script>
-    // SISTEMA DE IDIOMES
     let currentLang = 'ca';
     const translations = {
         ca: {
-            "nav-home": "Inici", "nav-projects": "Projectes ▾", "nav-about": "Sobre mi",
+            "nav-home": "Inici", "nav-projects": "Projectes ▾", "nav-about": "Sobre mi", "nav-contact": "Contacta",
             "hero-desc": "Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.",
             "about-title": "Sobre mi",
             "about-text1": "Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.",
@@ -256,12 +288,13 @@
             "exp-ocasio": "Gestió administrativa i suport en tasques de marketing digital.",
             "proj-title": "Projectes Destacats",
             "p1-desc": "Servidor de música auto-allotjat per a biblioteques personals.",
-            "p2-name": "Calculadora Retro", "p2-desc": "Calculadora funcional amb una interfície inspirada en els anys 80.",
+            "p2-name": "Calculadora", "p2-desc": "Calculadora funcional amb una interfície inspirada en els anys 80.",
             "p3-name": "Generador de Contrassenyes", "p3-desc": "Eina per crear claus segures amb estètica de terminal clàssica.",
-            "p4-name": "Rellotge Retro", "p4-desc": "Rellotge digital de precisió amb un disseny vintage minimalista."
+            "p4-name": "Rellotge Retro", "p4-desc": "Rellotge digital de precisió amb un disseny vintage minimalista.",
+            "contact-title": "Contacta", "contact-text": "Si tens alguna proposta o vols parlar sobre algun projecte, no dubtis a escriure'm."
         },
         es: {
-            "nav-home": "Inicio", "nav-projects": "Proyectos ▾", "nav-about": "Sobre mí",
+            "nav-home": "Inicio", "nav-projects": "Proyectos ▾", "nav-about": "Sobre mí", "nav-contact": "Contacta",
             "hero-desc": "Estudiante de 2º de SMR en el Instituto Lacetània & Entusiasta del Hardware.",
             "about-title": "Sobre mí",
             "about-text1": "¡Hola! Me llamo <strong>Pau Izquierdo</strong> y actualmente estoy cursando el segundo año del ciclo de <strong>Sistemas Microinformáticos y Redes (SMR) en el Instituto Lacetània</strong>.",
@@ -271,9 +304,10 @@
             "exp-ocasio": "Gestión administrativa y soporte en tareas de marketing digital.",
             "proj-title": "Proyectos Destacados",
             "p1-desc": "Servidor de música auto-alojado para bibliotecas personales.",
-            "p2-name": "Calculadora Retro", "p2-desc": "Calculadora funcional con una interfaz inspirada en los años 80.",
+            "p2-name": "Calculadora", "p2-desc": "Calculadora funcional con una interfaz inspirada en los años 80.",
             "p3-name": "Generador de Contraseñas", "p3-desc": "Herramienta para crear claves seguras con estética de terminal clásica.",
-            "p4-name": "Reloj Retro", "p4-desc": "Reloj digital de precisión con un diseño vintage minimalista."
+            "p4-name": "Reloj Retro", "p4-desc": "Reloj digital de precisión con un diseño vintage minimalista.",
+            "contact-title": "Contacta", "contact-text": "Si tienes alguna propuesta o quieres hablar sobre algún proyecto, no dudes en escribirme."
         }
     };
 
@@ -297,11 +331,12 @@
         document.getElementById('p3-desc').innerText = t["p3-desc"];
         document.getElementById('p4-name').innerText = t["p4-name"];
         document.getElementById('p4-desc').innerText = t["p4-desc"];
+        document.getElementById('contact-title').innerText = t["contact-title"];
+        document.getElementById('contact-text').innerText = t["contact-text"];
     }
 
-    // GESTIÓ DE SECCIONS
     function showSection(sectionId, subId = null) {
-        const sections = ['sobre-mi', 'proyectos', 'experiencia'];
+        const sections = ['sobre-mi', 'proyectos', 'experiencia', 'contacta'];
         
         sections.forEach(id => {
             const el = document.getElementById(id);
