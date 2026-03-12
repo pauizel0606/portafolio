@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
             --card-bg: #f8fafc;
             --text: #1e293b;
             --text-light: #64748b;
-            --transition: all 0.3s ease;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,7 +26,28 @@
             scroll-behavior: smooth;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- ANIMACIÓ D'APARICIÓ --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* CLASE PER OCULTAR SECCIONS */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- NAVEGACIÓ --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -42,10 +63,10 @@
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
 
         .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* --- DROPDOWN PROYECTOS --- */
+        /* --- DROPDOWN --- */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none;
@@ -64,143 +85,46 @@
 
         /* --- HERO --- */
         .hero {
-            padding: 100px 8% 60px;
+            padding: 120px 8% 80px;
             text-align: center;
             background: radial-gradient(circle at top right, #f1f5f9, #ffffff);
         }
-        .hero h1 { font-size: 2.8rem; color: var(--primary); margin-bottom: 15px; }
+        .hero h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; }
         .hero p { color: var(--text-light); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
-        /* --- SECCIÓN SOBRE MÍ (NUEVA) --- */
+        /* --- SECCIONS --- */
         .about-section { padding: 60px 8%; background: var(--card-bg); border-radius: 30px; margin: 40px 8%; }
         .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
-        .about-content h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
-        .about-content p { font-size: 1.1rem; color: var(--text); margin-bottom: 15px; }
-
-        /* --- SECCIÓN EXPERIENCIA --- */
+        
         .experience-section { padding: 40px 8% 60px; }
         .container { max-width: 1000px; margin: 0 auto; }
-
         .job-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
             border-left: 6px solid var(--accent);
-            transition: var(--transition);
         }
 
-        .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .company-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .job-tag {
-            background: #dbeafe;
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .job-list {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .job-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
-            color: var(--text);
-            font-size: 1.05rem;
-        }
-
-        .job-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* --- SECCIÓN PROYECTOS --- */
         .projects-section { padding: 60px 8% 100px; background: #fff; }
         .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            background: white;
-            border: 1px solid #f1f5f9;
-            border-radius: 15px;
-            overflow: hidden;
+        .project-card { 
+            border: 1px solid #f1f5f9; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: white; 
             transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .project-img { width: 100%; height: 180px; object-fit: cover; }
+        .project-info { padding: 20px; }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
+        footer { text-align: center; padding: 60px; color: var(--text-light); border-top: 1px solid #f1f5f9; }
 
-        .project-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #e2e8f0;
-        }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        .project-number {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .project-info h3 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .project-info p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        footer { text-align: center; padding: 60px; color: var(--text-light); font-size: 0.9rem; border-top: 1px solid #f1f5f9; }
-
-        @media (min-width: 1024px) {
-            .projects-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+        @media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
     </style>
 </head>
 <body>
@@ -208,103 +132,118 @@
 <nav>
     <div class="logo">PAU IZQUIERDO</div>
     <ul class="nav-links">
-        <li><a href="#">Inicio</a></li>
+        <li><a onclick="showSection('inicio')">Inici</a></li>
         <li class="dropdown">
-            <a href="#proyectos">Proyectos ▾</a>
+            <a onclick="showSection('proyectos')">Projectes ▾</a>
             <div class="dropdown-content">
-                <a href="#navidrome">Servidor Navidrome</a>
+                <a onclick="showSection('proyectos', 'navidrome')">Servidor Navidrome</a>
             </div>
         </li>
-        <li><a href="#sobre-mi">Sobre mi</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a onclick="showSection('sobre-mi')">Sobre mi</a></li>
+        <li><a href="#">Contacte</a></li>
     </ul>
 </nav>
 
-<header class="hero">
-    <h1>Experiencia Profesional</h1>
-    <p>Perfil técnico especializado en gestión de infraestructuras IT y soporte administrativo.</p>
+<header class="hero" id="hero-section">
+    <h1>Pau Izquierdo</h1>
+    <p>Estudiant de 2n de SMX a l'Institut Lacetània & Entusiasta del Hardware.</p>
 </header>
 
-<section class="about-section" id="sobre-mi">
+<section id="sobre-mi" class="about-section hidden">
     <div class="about-content">
         <h2>Sobre mi</h2>
         <p>Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.</p>
-        <p>Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>. M'agrada aprendre constantment i aplicar solucions tècniques eficients.</p>
+        <p>Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>.</p>
     </div>
 </section>
 
-<section class="experience-section">
+<section id="experiencia" class="experience-section hidden">
     <div class="container">
-        
+        <h2 style="text-align: center; margin-bottom: 30px;">Experiència Professional</h2>
         <div class="job-card">
-            <div class="job-header">
-                <span class="company-name">Kouten</span>
-                <span class="job-tag">Sistemas y Redes</span>
-            </div>
-            <ul class="job-list">
-                <li>Mantenimiento preventivo y correctivo de infraestructuras tecnológicas.</li>
-                <li>Gestión y monitorización de redes locales para asegurar la conectividad.</li>
-                <li>Instalación de sistemas y configuración de equipamiento IT corporativo.</li>
-                <li>Resolución de incidencias técnicas en instalaciones físicas.</li>
-            </ul>
+            <h3>Kouten</h3>
+            <p>Manteniment preventiu i correctiu d'infraestructures tecnològiques i xarxes locals.</p>
         </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <span class="company-name">Ocasionagestio</span>
-                <span class="job-tag">Administración y Marketing</span>
-            </div>
-            <ul class="job-list">
-                <li>Gestión de tareas administrativas y soporte organizativo interno.</li>
-                <li>Desarrollo de acciones de marketing para la promoción de servicios.</li>
-                <li>Atención al cliente y gestión de documentación comercial.</li>
-                <li>Apoyo en la visibilidad digital y comunicación de la empresa.</li>
-            </ul>
+        <div class="job-card" style="border-left-color: #64748b;">
+            <h3>Ocasionagestio</h3>
+            <p>Gestió administrativa i suport en tasques de marketing digital.</p>
         </div>
-
     </div>
 </section>
 
-<section class="projects-section" id="proyectos">
+<section id="proyectos" class="projects-section hidden">
     <div class="container">
-        <h2 class="section-title">Proyectos Destacados</h2>
-        
+        <h2 class="section-title">Projectes Destacats</h2>
         <div class="projects-grid">
-            
             <div class="project-card" id="navidrome">
                 <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-10%2012-11-38.png" alt="Navidrome" class="project-img">
                 <div class="project-info">
-                    <span class="project-number">Proyecto número 1</span>
-                    <h3>Servidor de música con Navidrome</h3>
-                    <p>Implementación de un servidor personal de streaming de música auto-alojado para acceder a mi biblioteca desde cualquier lugar.</p>
+                    <span style="color: var(--accent); font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 1</span>
+                    <h3>Servidor Navidrome</h3>
+                    <p>Implementació d'un servidor de streaming musical auto-allotjat.</p>
                 </div>
             </div>
-
+            
             <div class="project-card">
-                <div style="height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Próximamente</div>
+                <div style="height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Properament</div>
                 <div class="project-info">
-                    <span class="project-number">Proyecto número 2</span>
-                    <h3>En desarrollo</h3>
-                    <p>Descripción del nuevo proyecto técnico o de marketing.</p>
+                    <span style="color: #94a3b8; font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 2</span>
+                    <h3>En desenvolupament</h3>
+                    <p>Nou projecte tècnic en procés.</p>
                 </div>
             </div>
-
-            <div class="project-card">
-                <div style="height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Próximamente</div>
-                <div class="project-info">
-                    <span class="project-number">Proyecto número 3</span>
-                    <h3>En desarrollo</h3>
-                    <p>Descripción del nuevo proyecto técnico o de marketing.</p>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Pau Izquierdo. Diseñado con enfoque en IT & Estrategia.</p>
+    <p>&copy; 2026 Pau Izquierdo. Dissenyat amb enfocament en IT & Xarxes.</p>
 </footer>
+
+<script>
+    function showSection(sectionId, subId = null) {
+        const sections = ['sobre-mi', 'proyectos', 'experiencia'];
+        
+        // 1. Ocultar totes les seccions i treure la classe d'animació
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            el.classList.add('hidden');
+            el.classList.remove('fade-in');
+        });
+
+        if (sectionId === 'inicio') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        // 2. Mostrar la secció seleccionada
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.classList.remove('hidden');
+            // Afegim l'animació un mil·lisegon després perquè es reiniciï
+            setTimeout(() => {
+                target.classList.add('fade-in');
+            }, 10);
+
+            // 3. També mostrem experiència si anem a "sobre-mi" per omplir contingut (opcional)
+            if(sectionId === 'sobre-mi') {
+                const exp = document.getElementById('experiencia');
+                exp.classList.remove('hidden');
+                exp.classList.add('fade-in');
+            }
+            
+            // 4. Scroll suave al contingut
+            if (subId) {
+                setTimeout(() => {
+                    const subTarget = document.getElementById(subId);
+                    subTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
