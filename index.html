@@ -23,6 +23,7 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         /* --- NAVEGACIÓN --- */
@@ -69,6 +70,12 @@
         }
         .hero h1 { font-size: 2.8rem; color: var(--primary); margin-bottom: 15px; }
         .hero p { color: var(--text-light); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+        /* --- SECCIÓN SOBRE MÍ (NUEVA) --- */
+        .about-section { padding: 60px 8%; background: var(--card-bg); border-radius: 30px; margin: 40px 8%; }
+        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .about-content h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        .about-content p { font-size: 1.1rem; color: var(--text); margin-bottom: 15px; }
 
         /* --- SECCIÓN EXPERIENCIA --- */
         .experience-section { padding: 40px 8% 60px; }
@@ -203,12 +210,12 @@
     <ul class="nav-links">
         <li><a href="#">Inicio</a></li>
         <li class="dropdown">
-            <a href="#">Proyectos ▾</a>
+            <a href="#proyectos">Proyectos ▾</a>
             <div class="dropdown-content">
                 <a href="#navidrome">Servidor Navidrome</a>
             </div>
         </li>
-        <li><a href="#">Sobre mí</a></li>
+        <li><a href="#sobre-mi">Sobre mi</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
 </nav>
@@ -217,6 +224,14 @@
     <h1>Experiencia Profesional</h1>
     <p>Perfil técnico especializado en gestión de infraestructuras IT y soporte administrativo.</p>
 </header>
+
+<section class="about-section" id="sobre-mi">
+    <div class="about-content">
+        <h2>Sobre mi</h2>
+        <p>Hola! Em dic <strong>Pau Izquierdo</strong> i actualment estic cursant el segon any del cicle de <strong>Sistemes Microinformàtics i Xarxes (SMX) a l'Institut Lacetània</strong>.</p>
+        <p>Tinc una gran passió pel món de la tecnologia i se'm dona especialment bé tot el que està relacionat amb el <strong>hardware</strong> i la <strong>gestió de xarxes</strong>. M'agrada aprendre constantment i aplicar solucions tècniques eficients.</p>
+    </div>
+</section>
 
 <section class="experience-section">
     <div class="container">
