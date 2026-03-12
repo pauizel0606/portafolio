@@ -26,26 +26,13 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ANIMACIÓ D'APARICIÓ --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* CLASE PER OCULTAR SECCIONS */
-        .hidden {
-            display: none !important;
-        }
+        .fade-in { animation: fadeInUp 0.6s ease forwards; }
+        .hidden { display: none !important; }
 
         /* --- NAVEGACIÓ --- */
         nav {
@@ -61,7 +48,6 @@
         }
 
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
-
         .nav-links { display: flex; list-style: none; gap: 2.5rem; }
         .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: var(--transition); cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
@@ -72,7 +58,7 @@
             display: none;
             position: absolute;
             background: white;
-            min-width: 200px;
+            min-width: 220px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             border-radius: 10px;
             top: 100%;
@@ -90,7 +76,6 @@
             background: radial-gradient(circle at top right, #f1f5f9, #ffffff);
         }
         .hero h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; }
-        .hero p { color: var(--text-light); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
         /* --- SECCIONS --- */
         .about-section { padding: 60px 8%; background: var(--card-bg); border-radius: 30px; margin: 40px 8%; }
@@ -98,13 +83,7 @@
         
         .experience-section { padding: 40px 8% 60px; }
         .container { max-width: 1000px; margin: 0 auto; }
-        .job-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            border-left: 6px solid var(--accent);
-        }
+        .job-card { background: var(--card-bg); border-radius: 20px; padding: 40px; margin-bottom: 30px; border-left: 6px solid var(--accent); }
 
         .projects-section { padding: 60px 8% 100px; background: #fff; }
         .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; }
@@ -116,11 +95,12 @@
             overflow: hidden; 
             background: white; 
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
         .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        .project-img { width: 100%; height: 180px; object-fit: cover; }
-        .project-info { padding: 20px; }
+        .project-img { width: 100%; height: 200px; object-fit: cover; }
+        .project-info { padding: 20px; flex-grow: 1; }
 
         footer { text-align: center; padding: 60px; color: var(--text-light); border-top: 1px solid #f1f5f9; }
 
@@ -137,6 +117,8 @@
             <a onclick="showSection('proyectos')">Projectes ▾</a>
             <div class="dropdown-content">
                 <a onclick="showSection('proyectos', 'navidrome')">Servidor Navidrome</a>
+                <a onclick="showSection('proyectos', 'calculadora')">Calculadora Retro</a>
+                <a onclick="showSection('proyectos')">Hardware</a>
             </div>
         </li>
         <li><a onclick="showSection('sobre-mi')">Sobre mi</a></li>
@@ -183,11 +165,20 @@
                     <p>Implementació d'un servidor de streaming musical auto-allotjat.</p>
                 </div>
             </div>
+
+            <div class="project-card" id="calculadora">
+                <img src="https://raw.githubusercontent.com/pauizel0606/portafolio/main/Captura%20desde%202026-03-12%2008-58-38.png" alt="Calculadora Retro" class="project-img">
+                <div class="project-info">
+                    <span style="color: var(--accent); font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 2</span>
+                    <h3>Calculadora Retro</h3>
+                    <p>Disseny i desenvolupament d'una calculadora amb estètica clàssica i funcionalitats modernes.</p>
+                </div>
+            </div>
             
             <div class="project-card">
-                <div style="height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Properament</div>
+                <div style="height: 200px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">Properament</div>
                 <div class="project-info">
-                    <span style="color: #94a3b8; font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 2</span>
+                    <span style="color: #94a3b8; font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">Projecte 3</span>
                     <h3>En desenvolupament</h3>
                     <p>Nou projecte tècnic en procés.</p>
                 </div>
@@ -204,7 +195,6 @@
     function showSection(sectionId, subId = null) {
         const sections = ['sobre-mi', 'proyectos', 'experiencia'];
         
-        // 1. Ocultar totes les seccions i treure la classe d'animació
         sections.forEach(id => {
             const el = document.getElementById(id);
             el.classList.add('hidden');
@@ -216,23 +206,17 @@
             return;
         }
 
-        // 2. Mostrar la secció seleccionada
         const target = document.getElementById(sectionId);
         if (target) {
             target.classList.remove('hidden');
-            // Afegim l'animació un mil·lisegon després perquè es reiniciï
-            setTimeout(() => {
-                target.classList.add('fade-in');
-            }, 10);
+            setTimeout(() => { target.classList.add('fade-in'); }, 10);
 
-            // 3. També mostrem experiència si anem a "sobre-mi" per omplir contingut (opcional)
             if(sectionId === 'sobre-mi') {
                 const exp = document.getElementById('experiencia');
                 exp.classList.remove('hidden');
                 exp.classList.add('fade-in');
             }
             
-            // 4. Scroll suave al contingut
             if (subId) {
                 setTimeout(() => {
                     const subTarget = document.getElementById(subId);
