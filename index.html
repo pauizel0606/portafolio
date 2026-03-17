@@ -3,49 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pau Izel - Portfolio</title>
+    <title>Pau Izel | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* VARIABLES PARA LOS DOS MODOS */
+        /* CONFIGURACIÓN DE COLORES Y VARIABLES */
         :root {
-            --bg-color: #f4f7f6;
+            --bg-color: #f8fafc;
+            --nav-bg: rgba(255, 255, 255, 0.8);
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --accent-color: #007bff;
-            --border-color: #dddddd;
-            --nav-bg: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent: #0f172a; /* Negro elegante */
+            --accent-hover: #334155;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         [data-theme="dark"] {
-            --bg-color: #0b0e14;
-            --card-bg: #1a1d23;
-            --text-color: #e0e0e0;
-            --accent-color: #3793ff;
-            --border-color: #333a45;
-            --nav-bg: #1a1d23;
-            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --bg-color: #020617;
+            --nav-bg: rgba(15, 23, 42, 0.8);
+            --card-bg: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8; /* Azul brillante para contraste */
+            --accent-hover: #7dd3fc;
+            --border: #1e293b;
+            --shadow: 0 4px 30px rgba(0,0,0,0.3);
         }
 
-        /* ESTILOS BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background 0.3s, color 0.3s;
-        }
-
+        /* RESET Y BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-main);
+            transition: background 0.4s ease;
+            padding-top: 80px;
         }
 
-        /* MENÚ DE NAVEGACIÓN (TU ESTRUCTURA) */
+        /* NAVEGACIÓN ESTILO MINIMALISTA */
         nav {
             background-color: var(--nav-bg);
-            padding: 1rem 5%;
+            backdrop-filter: blur(10px);
+            padding: 1rem 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,142 +54,112 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
         }
 
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent-color); }
+        .logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -1px; }
 
-        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.9rem; }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* BOTÓN MODO OSCURO */
         .theme-toggle {
-            background: var(--accent-color);
-            color: white;
+            background: var(--text-main);
+            color: var(--bg-color);
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.8rem;
             font-weight: 600;
+            font-size: 0.75rem;
         }
 
         /* CONTENEDOR PRINCIPAL */
-        .container {
-            max-width: 1000px;
-            margin: 100px auto 50px;
-            padding: 0 20px;
-        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-        /* SECCIONES (SOBRE MÍ, CONTACTO...) */
-        section {
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-out;
+        /* SECCIÓN SOBRE MÍ */
+        #about {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease;
         }
+        #about h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        #about p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
+        /* APARTADO DE PROYECTOS MEJORADO */
+        .projects-header {
+            margin-bottom: 40px;
+            text-align: left;
         }
-
-        /* ESTRUCTURA DE PROYECTOS (ESTILO INSTAGRAM/POST) */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+        .projects-header h2 { font-size: 1.8rem; font-weight: 800; }
 
         .project-card {
             background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            margin-bottom: 50px;
+            border: 1px solid var(--border);
             box-shadow: var(--shadow);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        /* IMAGEN DEL PROYECTO */
-        .project-img {
+        /* Imagen con efecto */
+        .project-img-wrapper {
             width: 100%;
-            height: 200px;
-            background-color: #333;
+            height: 350px;
+            background: #e2e8f0;
             overflow: hidden;
+            position: relative;
         }
 
-        .project-img img {
+        .project-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
-        .project-card:hover .project-img img {
-            transform: scale(1.1);
+        .project-card:hover .project-img-wrapper img {
+            transform: scale(1.05);
         }
 
-        /* CONTENIDO DEL POST */
-        .project-info {
-            padding: 20px;
-        }
+        /* Cuerpo del proyecto */
+        .project-body { padding: 30px; }
+        .project-body h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .project-body p { color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
 
-        .project-info h3 {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .project-info p {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            opacity: 0.8;
-            margin-bottom: 20px;
-            height: 45px;
-            overflow: hidden;
-        }
-
-        /* BOTÓN DE APERTURA (LO QUE PEDISTE) */
-        .btn-open {
-            display: block;
-            text-align: center;
-            background: var(--accent-color);
-            color: white !important;
+        /* Botón estilo moderno */
+        .btn-visit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent);
+            color: var(--bg-color) !important;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 12px 25px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: opacity 0.3s;
-        }
-
-        .btn-open:hover {
-            opacity: 0.8;
-        }
-
-        /* HABILIDADES */
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
             gap: 10px;
-            list-style: none;
+            transition: all 0.3s ease;
         }
 
-        .skills-list li {
+        .btn-visit:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* SECCIÓN CONTACTO */
+        #contact {
+            padding: 60px 30px;
             background: var(--card-bg);
-            padding: 8px 15px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-top: 100px;
         }
 
         /* ANIMACIONES */
@@ -199,7 +170,8 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplificación para móvil */
+            .project-img-wrapper { height: 250px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -211,89 +183,88 @@
             <li><a href="#about">Sobre mí</a></li>
             <li><a href="#projects">Proyectos</a></li>
             <li><a href="#contact">Contacto</a></li>
-            <li><button class="theme-toggle" id="mode-toggle">MODO OSCURO</button></li>
+            <li><button class="theme-toggle" id="mode-toggle">TEMA</button></li>
         </ul>
     </nav>
 
     <div class="container">
         
         <section id="about">
-            <h2>Sobre mí</h2>
-            <p>Hola, soy un desarrollador entusiasta enfocado en crear herramientas web funcionales y nostálgicas. Bienvenido a mi portafolio donde podrás explorar mis creaciones.</p>
-        </section>
-
-        <section>
-            <h2>Habilidades</h2>
-            <ul class="skills-list">
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>JavaScript</li>
-                <li>GitHub Pages</li>
-                <li>UI Design</li>
-            </ul>
+            <h1>Hola, soy Pau.</h1>
+            <p>Desarrollador enfocado en crear experiencias web interactivas, funcionales y con un toque retro.</p>
         </section>
 
         <section id="projects">
-            <h2>Mis Proyectos</h2>
-            <div class="projects-container">
-                
-                <article class="project-card">
-                    <div class="project-img">
-                        <img src="https://shots.codepen.io/username/pen/preview.png" alt="Vista previa Calculadora" id="img-1">
-                    </div>
-                    <div class="project-info">
-                        <h3>Calculadora</h3>
-                        <p>Una herramienta de cálculo con diseño limpio y modo oscuro integrado.</p>
-                        <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-open">Abrir Proyecto</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-img">
-                        <img src="https://shots.codepen.io/username/pen/preview.png" alt="Vista previa Password" id="img-2">
-                    </div>
-                    <div class="project-info">
-                        <h3>Generador de Claves</h3>
-                        <p>Genera contraseñas seguras de forma instantánea y personalizada.</p>
-                        <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-open">Abrir Proyecto</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-img">
-                        <img src="https://shots.codepen.io/username/pen/preview.png" alt="Vista previa Windows 95" id="img-3">
-                    </div>
-                    <div class="project-info">
-                        <h3>Windows 95</h3>
-                        <p>Experiencia nostálgica recreando el sistema operativo clásico en la web.</p>
-                        <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-open">Abrir Proyecto</a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-img">
-                        <img src="https://shots.codepen.io/username/pen/preview.png" alt="Vista previa Reloj" id="img-4">
-                    </div>
-                    <div class="project-info">
-                        <h3>Reloj Retro</h3>
-                        <p>Un reloj con diseño de displays antiguos y estética vintage.</p>
-                        <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-open">Abrir Proyecto</a>
-                    </div>
-                </article>
-
+            <div class="projects-header">
+                <h2>Proyectos Destacados</h2>
             </div>
+
+            <article class="project-card" style="animation: fadeIn 0.6s ease both;">
+                <div class="project-img-wrapper">
+                    <img id="img-1" src="" alt="Cargando vista previa...">
+                </div>
+                <div class="project-body">
+                    <h3>Calculadora Interactiva</h3>
+                    <p>Una herramienta de cálculo con un diseño ultra limpio, optimizada para dispositivos móviles y con una lógica aritmética robusta.</p>
+                    <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-visit">
+                        Visitar Sitio Web <span>↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" style="animation: fadeIn 0.8s ease both;">
+                <div class="project-img-wrapper">
+                    <img id="img-2" src="" alt="Cargando vista previa...">
+                </div>
+                <div class="project-body">
+                    <h3>Generador de Seguridad</h3>
+                    <p>Aplicación diseñada para la creación de contraseñas seguras mediante algoritmos de aleatoriedad, ayudando a mejorar la ciberseguridad personal.</p>
+                    <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-visit">
+                        Visitar Sitio Web <span>↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" style="animation: fadeIn 1s ease both;">
+                <div class="project-img-wrapper">
+                    <img id="img-3" src="" alt="Cargando vista previa...">
+                </div>
+                <div class="project-body">
+                    <h3>Experiencia Windows 95</h3>
+                    <p>Un tributo interactivo al sistema operativo que marcó una era. Recreación de ventanas, menús y la estética clásica de los 90.</p>
+                    <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-visit">
+                        Visitar Sitio Web <span>↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card" style="animation: fadeIn 1.2s ease both;">
+                <div class="project-img-wrapper">
+                    <img id="img-4" src="" alt="Cargando vista previa...">
+                </div>
+                <div class="project-body">
+                    <h3>Reloj Digital Retro</h3>
+                    <p>Visualizador de tiempo con estética de tubos nixie y pantallas vintage, combinando lo antiguo con la tecnología web moderna.</p>
+                    <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-visit">
+                        Visitar Sitio Web <span>↗</span>
+                    </a>
+                </div>
+            </article>
+
         </section>
 
         <section id="contact">
-            <h2>Contacta conmigo</h2>
-            <p>Puedes encontrarme en mis redes sociales o enviarme un correo para cualquier colaboración.</p>
-            <p style="margin-top: 10px;"><strong>Email:</strong> pauizel0606@ejemplo.com</p>
+            <h2>¿Hablamos?</h2>
+            <p>Estoy disponible para nuevos proyectos y colaboraciones.</p>
+            <div style="margin-top: 30px;">
+                <a href="mailto:tuemail@ejemplo.com" class="btn-visit">Enviar Email</a>
+            </div>
         </section>
 
     </div>
 
     <script>
-        // Lógica para cambiar de modo
+        // Cambio de tema
         const toggleBtn = document.getElementById('mode-toggle');
         const body = document.body;
 
@@ -303,12 +274,17 @@
             toggleBtn.innerText = isDark ? 'MODO OSCURO' : 'MODO CLARO';
         });
 
-        // Simulación de carga de imágenes reales de tus enlaces para que no se vea vacío
-        // Nota: En un entorno real podrías usar capturas de pantalla de tus webs
-        document.getElementById('img-1').src = "https://api.microlink.io?url=https%3A%2F%2Fpauizel0606.github.io%2Fcalculadora%2F&screenshot=true&embed=screenshot.url";
-        document.getElementById('img-2').src = "https://api.microlink.io?url=https%3A%2F%2Fpauizel0606.github.io%2FGenerador-de-contrasenyes%2F&screenshot=true&embed=screenshot.url";
-        document.getElementById('img-3').src = "https://api.microlink.io?url=https%3A%2F%2Fpauizel0606.github.io%2FWindows95%2F&screenshot=true&embed=screenshot.url";
-        document.getElementById('img-4').src = "https://api.microlink.io?url=https%3A%2F%2Fpauizel0606.github.io%2FRellotge-retro%2F&screenshot=true&embed=screenshot.url";
+        // Capturas automáticas de tus proyectos para las fotos
+        const projects = [
+            { id: 'img-1', url: 'https://pauizel0606.github.io/calculadora/' },
+            { id: 'img-2', url: 'https://pauizel0606.github.io/Generador-de-contrasenyes/' },
+            { id: 'img-3', url: 'https://pauizel0606.github.io/Windows95/' },
+            { id: 'img-4', url: 'https://pauizel0606.github.io/Rellotge-retro/' }
+        ];
+
+        projects.forEach(proj => {
+            document.getElementById(proj.id).src = `https://api.microlink.io?url=${encodeURIComponent(proj.url)}&screenshot=true&embed=screenshot.url`;
+        });
     </script>
 </body>
 </html>
