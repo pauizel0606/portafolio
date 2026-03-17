@@ -3,250 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio de Proyectos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Pau Izel | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             /* MODO CLARO */
-            --bg-color: #f1f5f9;
+            --bg-color: #fafafa;
+            --nav-bg: #ffffff;
             --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --border: #e2e8f0;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            --radius: 16px;
+            --text-main: #262626;
+            --text-muted: #8e8e8e;
+            --accent: #0095f6;
+            --border: #dbdbdb;
+            --shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         [data-theme='dark'] {
             /* MODO OSCURO */
-            --bg-color: #0b0f1a;
-            --card-bg: #161b2a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #60a5fa;
-            --accent-hover: #3b82f6;
-            --border: #2d3748;
-            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            --bg-color: #000000;
+            --nav-bg: #121212;
+            --card-bg: #121212;
+            --text-main: #f5f5f5;
+            --text-muted: #a8a8a8;
+            --accent: #1da1f2;
+            --border: #262626;
+            --shadow: 0 4px 12px rgba(255,255,255,0.02);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            line-height: 1.6;
-            padding: 40px 20px;
+            transition: background 0.3s ease;
+            padding-top: 80px; /* Espacio para el menú fijo */
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        /* Botón de cambio de tema */
-        .theme-toggle {
+        /* BARRA DE NAVEGACIÓN */
+        nav {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            z-index: 100;
-            width: 45px;
-            height: 45px;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
             display: flex;
-            align-items: center;
             justify-content: center;
-            transition: transform 0.2s ease;
+            align-items: center;
+            z-index: 1000;
+            transition: background 0.3s ease;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* Grid de Proyectos */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* Tarjeta de Proyecto */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .nav-content {
+            width: 100%;
+            max-width: 935px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            opacity: 0;
-            animation: fadeInUp 0.6s forwards;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-        }
-
-        /* Botón de Enlace */
-        .btn {
-            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            background-color: var(--accent);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 0 20px;
+        }
+
+        .logo { font-weight: 800; font-size: 1.4rem; cursor: pointer; }
+
+        .nav-links a {
             text-decoration: none;
+            color: var(--text-main);
+            margin-left: 20px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: background 0.3s ease;
-            gap: 8px;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
+        /* CONTENEDOR PRINCIPAL */
+        .main-container {
+            max-width: 600px; /* Ancho estilo feed de Instagram */
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s ease;
+        /* SECCIONES TEXTO (Sobre mí / Contacto) */
+        .info-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease;
         }
 
-        .btn:hover svg {
-            transform: translate(3px, -3px);
+        /* POSTS DE PROYECTOS (Estilo Instagram) */
+        .project-post {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease both;
         }
 
-        /* Escalonamiento de animaciones */
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
+        .post-header {
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        /* Keyframes */
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-radius: 50%;
+        }
+
+        .post-title { font-weight: 700; font-size: 0.9rem; }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #262626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        /* Simulando una imagen con gradientes bonitos */
+        .img-calc { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .img-pass { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .img-win { background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%); }
+        .img-clock { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+
+        .post-content { padding: 15px; }
+
+        .post-description {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .post-description b { margin-right: 5px; }
+
+        /* BOTÓN DE ACCIÓN */
+        .btn-open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .btn-open:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* TOGGLE THEME BUTTON */
+        #theme-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 1.2rem;
+        }
+
+        /* ANIMACIONES */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 600px) {
-            body { padding: 20px; }
-            header h1 { font-size: 1.8rem; }
+            .main-container { padding: 10px; }
+            body { padding-top: 70px; }
         }
     </style>
 </head>
 <body data-theme="light">
 
-    <button class="theme-toggle" id="themeBtn" title="Cambiar modo">
-        <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    </button>
-
-    <header>
-        <h1>Mis Proyectos</h1>
-        <p>Una colección de herramientas interactivas y experimentos retro.</p>
-    </header>
-
-    <main class="projects-grid">
-        <article class="card">
-            <div>
-                <h3>Calculadora</h3>
-                <p>Calculadora funcional con una interfaz pulida y lógica aritmética precisa.</p>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Pau Izel</div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+                <button id="theme-btn">🌓</button>
             </div>
-            <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn">
-                Abrir Proyecto
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-            </a>
-        </article>
+        </div>
+    </nav>
 
-        <article class="card">
-            <div>
-                <h3>Generador de Claves</h3>
-                <p>Crea contraseñas seguras y personalizables para mejorar tu seguridad digital.</p>
-            </div>
-            <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn">
-                Abrir Proyecto
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-            </a>
-        </article>
+    <main class="main-container">
 
-        <article class="card">
-            <div>
-                <h3>Windows 95</h3>
-                <p>Una recreación nostálgica del sistema operativo clásico de Microsoft.</p>
-            </div>
-            <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn">
-                Abrir Proyecto
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-            </a>
-        </article>
+        <section id="inicio" class="info-section">
+            <h2>Sobre mí</h2>
+            <p style="margin-top: 10px; color: var(--text-muted);">
+                Hola, soy Pau. Bienvenido a mi rincón de experimentos digitales. Aquí puedes ver mis últimos trabajos de desarrollo web, desde herramientas útiles hasta recreaciones nostálgicas.
+            </p>
+        </section>
 
-        <article class="card">
-            <div>
-                <h3>Reloj Retro</h3>
-                <p>Diseño vintage inspirado en los displays clásicos, ideal para escritorio.</p>
+        <section id="proyectos">
+            
+            <article class="project-post">
+                <div class="post-header">
+                    <div class="avatar"></div>
+                    <span class="post-title">pauizel_dev • Calculadora</span>
+                </div>
+                <div class="post-image img-calc">🔢</div>
+                <div class="post-content">
+                    <p class="post-description"><b>pauizel_dev</b> Una calculadora minimalista con un motor lógico optimizado para operaciones rápidas.</p>
+                    <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-open">Ver Proyecto Completo</a>
+                </div>
+            </article>
+
+            <article class="project-post">
+                <div class="post-header">
+                    <div class="avatar"></div>
+                    <span class="post-title">pauizel_dev • PasswordGen</span>
+                </div>
+                <div class="post-image img-pass">🔐</div>
+                <div class="post-content">
+                    <p class="post-description"><b>pauizel_dev</b> Generador de contraseñas robustas. ¡La seguridad es lo primero!</p>
+                    <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-open">Ver Proyecto Completo</a>
+                </div>
+            </article>
+
+            <article class="project-post">
+                <div class="post-header">
+                    <div class="avatar"></div>
+                    <span class="post-title">pauizel_dev • Nostalgia95</span>
+                </div>
+                <div class="post-image img-win">💻</div>
+                <div class="post-content">
+                    <p class="post-description"><b>pauizel_dev</b> Recreación de la interfaz de Windows 95. Un viaje al pasado.</p>
+                    <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-open">Ver Proyecto Completo</a>
+                </div>
+            </article>
+
+            <article class="project-post">
+                <div class="post-header">
+                    <div class="avatar"></div>
+                    <span class="post-title">pauizel_dev • RetroClock</span>
+                </div>
+                <div class="post-image img-clock">⏰</div>
+                <div class="post-content">
+                    <p class="post-description"><b>pauizel_dev</b> Reloj digital con estética retro-vintage. Perfecto para tu segundo monitor.</p>
+                    <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-open">Ver Proyecto Completo</a>
+                </div>
+            </article>
+
+        </section>
+
+        <section id="contacto" class="info-section">
+            <h2>Contacta conmigo</h2>
+            <p style="margin-top: 10px; color: var(--text-muted);">
+                ¿Tienes alguna idea o proyecto en mente? No dudes en contactarme a través de mis redes o correo electrónico.
+            </p>
+            <div style="margin-top: 20px;">
+                <p>📧 Email: pau@ejemplo.com</p>
+                <p>🔗 GitHub: @pauizel0606</p>
             </div>
-            <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn">
-                Abrir Proyecto
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-            </a>
-        </article>
+        </section>
+
     </main>
 
     <script>
-        const themeBtn = document.getElementById('themeBtn');
+        const btn = document.getElementById('theme-btn');
         const body = document.body;
 
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            
-            // Animación simple al pulsar
-            themeBtn.style.transform = 'rotate(180deg)';
-            setTimeout(() => themeBtn.style.transform = 'rotate(0deg)', 300);
+        btn.addEventListener('click', () => {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            btn.innerText = isDark ? '🌓' : '☀️';
+        });
+
+        // Efecto de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
