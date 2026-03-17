@@ -35,7 +35,6 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             transition: background 0.4s ease;
-            padding-top: 100px;
         }
 
         /* NAVEGACIÓN */
@@ -55,7 +54,17 @@
 
         .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
 
-        .nav-controls { display: flex; gap: 15px; align-items: center; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-main); 
+            font-weight: 600; 
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-controls { display: flex; gap: 10px; align-items: center; margin-left: 20px; }
 
         .btn-control {
             background: var(--card-bg);
@@ -65,25 +74,31 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: all 0.2s;
         }
-
         .btn-control:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* CONTENEDOR */
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        /* SECCIONES TRANSICIÓN */
+        section { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 100px 5% 40px;
+        }
 
-        /* CABECERA */
-        #about { text-align: center; margin-bottom: 60px; }
-        #about h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 800; }
+        /* INICIO (HERO) */
+        #inicio { text-align: center; }
+        #inicio h1 { font-size: 4rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
+        #inicio p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
 
-        /* GRID DE PROYECTOS (4 POR FILA) */
+        /* PROYECTOS (4 POR FILA) */
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 40px; text-align: center; }
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Fuerza 4 columnas */
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 80px;
         }
 
         .project-card {
@@ -96,25 +111,14 @@
             flex-direction: column;
             transition: transform 0.3s ease;
         }
-
         .project-card:hover { transform: translateY(-8px); }
 
-        .project-img-wrapper {
-            width: 100%;
-            height: 180px;
-            background: #cbd5e1;
-            overflow: hidden;
-        }
+        .project-img-wrapper { width: 100%; height: 160px; background: #cbd5e1; overflow: hidden; }
+        .project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        .project-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-body h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .project-body p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; flex-grow: 1; }
+        .project-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-body h3 { font-size: 1rem; margin-bottom: 8px; }
+        .project-body p { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 15px; flex-grow: 1; line-height: 1.4; }
 
         .btn-visit {
             display: block;
@@ -122,35 +126,39 @@
             background-color: var(--accent);
             color: #fff !important;
             text-decoration: none;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: opacity 0.2s;
+            font-size: 0.8rem;
         }
 
         /* CONTACTO */
-        #contact {
+        #contacto { align-items: center; text-align: center; }
+        .contact-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 50px;
+            border-radius: 24px;
+            padding: 50px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--shadow);
         }
-
         .email-link {
+            display: inline-block;
+            margin-top: 25px;
             color: var(--accent);
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             text-decoration: none;
+            word-break: break-all;
         }
 
         /* RESPONSIVE */
-        @media (max-width: 1100px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { 
-            .projects-grid { grid-template-columns: 1fr; } 
-            #about h1 { font-size: 2rem; }
+        @media (max-width: 1200px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .nav-links { display: none; }
+            #inicio h1 { font-size: 2.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -158,105 +166,99 @@
 
     <nav>
         <div class="logo">PAU IZEL</div>
-        <div class="nav-controls">
-            <button class="btn-control" id="lang-toggle">CATALÀ</button>
-            <button class="btn-control" id="mode-toggle">MODO OSCURO</button>
+        <div style="display: flex; align-items: center;">
+            <ul class="nav-links">
+                <li><a href="#inicio" id="nav-home">Inicio</a></li>
+                <li><a href="#proyectos" id="nav-projects">Proyectos</a></li>
+                <li><a href="#contacto" id="nav-contact">Contacto</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="btn-control" id="lang-toggle">CATALÀ</button>
+                <button class="btn-control" id="mode-toggle">MODO OSCURO</button>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        
-        <section id="about">
-            <h1 id="txt-hero-title">Hola, soy Pau.</h1>
-            <p id="txt-hero-desc">Desarrollador enfocado en crear herramientas web interactivas.</p>
-        </section>
+    <section id="inicio">
+        <h1 id="txt-hero-title">Hola, soy Pau.</h1>
+        <p id="txt-hero-desc">Desarrollador enfocado en crear herramientas web interactivas y funcionales.</p>
+    </section>
 
-        <section id="projects">
-            <div class="projects-grid">
-                
-                <article class="project-card">
-                    <div class="project-img-wrapper">
-                        <img id="img-1" src="" alt="Calculadora">
-                    </div>
-                    <div class="project-body">
-                        <h3 id="p1-title">Calculadora</h3>
-                        <p id="p1-desc">Herramienta de cálculo con diseño limpio y modo oscuro.</p>
-                        <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
-                    </div>
-                </article>
+    <section id="proyectos">
+        <h2 class="section-title" id="txt-projects-title">Mis Proyectos</h2>
+        <div class="projects-grid">
+            
+            <article class="project-card">
+                <div class="project-img-wrapper"><img id="img-1" src="" alt="Calculadora"></div>
+                <div class="project-body">
+                    <h3 id="p1-title">Calculadora</h3>
+                    <p id="p1-desc">Herramienta de cálculo con diseño limpio y modo oscuro.</p>
+                    <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
+                </div>
+            </article>
 
-                <article class="project-card">
-                    <div class="project-img-wrapper">
-                        <img id="img-2" src="" alt="Password">
-                    </div>
-                    <div class="project-body">
-                        <h3 id="p2-title">Generador de Claves</h3>
-                        <p id="p2-desc">Crea contraseñas seguras de forma personalizada.</p>
-                        <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
-                    </div>
-                </article>
+            <article class="project-card">
+                <div class="project-img-wrapper"><img id="img-2" src="" alt="Password"></div>
+                <div class="project-body">
+                    <h3 id="p2-title">Generador de Claves</h3>
+                    <p id="p2-desc">Crea contraseñas seguras de forma personalizada.</p>
+                    <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
+                </div>
+            </article>
 
-                <article class="project-card">
-                    <div class="project-img-wrapper">
-                        <img id="img-3" src="" alt="Windows 95">
-                    </div>
-                    <div class="project-body">
-                        <h3 id="p3-title">Windows 95</h3>
-                        <p id="p3-desc">Recreación nostálgica del sistema operativo clásico.</p>
-                        <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
-                    </div>
-                </article>
+            <article class="project-card">
+                <div class="project-img-wrapper"><img id="img-3" src="" alt="Windows 95"></div>
+                <div class="project-body">
+                    <h3 id="p3-title">Windows 95</h3>
+                    <p id="p3-desc">Recreación nostálgica del sistema operativo clásico.</p>
+                    <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
+                </div>
+            </article>
 
-                <article class="project-card">
-                    <div class="project-img-wrapper">
-                        <img id="img-4" src="" alt="Reloj">
-                    </div>
-                    <div class="project-body">
-                        <h3 id="p4-title">Reloj Retro</h3>
-                        <p id="p4-desc">Reloj digital con estética vintage y nixie.</p>
-                        <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
-                    </div>
-                </article>
+            <article class="project-card">
+                <div class="project-img-wrapper"><img id="img-4" src="" alt="Reloj"></div>
+                <div class="project-body">
+                    <h3 id="p4-title">Reloj Retro</h3>
+                    <p id="p4-desc">Reloj digital con estética vintage y nixie.</p>
+                    <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-visit btn-text">Visitar Sitio</a>
+                </div>
+            </article>
 
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact">
+    <section id="contacto">
+        <div class="contact-card">
             <h2 id="txt-contact-title">¿Hablamos?</h2>
-            <p id="txt-contact-desc">No dudes en contactarme para cualquier consulta.</p>
-            <div style="margin-top: 20px;">
-                <a href="mailto:pauizel0606@gmail.com" class="email-link">pauizel0606@gmail.com</a>
-            </div>
-        </section>
-
-    </div>
+            <p id="txt-contact-desc">No dudes en contactarme para cualquier consulta o colaboración profesional.</p>
+            <a href="mailto:pauizel0606@gmail.com" class="email-link">pauizel0606@gmail.com</a>
+        </div>
+    </section>
 
     <script>
         // TRADUCCIONES
         const translations = {
             es: {
-                langBtn: "CATALÀ",
-                modeDark: "MODO OSCURO",
-                modeLight: "MODO CLARO",
+                home: "Inicio", projects: "Proyectos", contact: "Contacto",
+                langBtn: "CATALÀ", modeDark: "MODO OSCURO", modeLight: "MODO CLARO",
                 heroTitle: "Hola, soy Pau.",
-                heroDesc: "Desarrollador enfocado en crear herramientas web interactivas.",
-                visit: "Visitar Sitio",
+                heroDesc: "Desarrollador enfocado en crear herramientas web interactivas y funcionales.",
+                projectsTitle: "Mis Proyectos", visit: "Visitar Sitio",
                 contactTitle: "¿Hablamos?",
-                contactDesc: "No dudes en contactarme para cualquier consulta.",
+                contactDesc: "No dudes en contactarme para cualquier consulta o colaboración profesional.",
                 p1T: "Calculadora", p1D: "Herramienta de cálculo con diseño limpio y modo oscuro.",
                 p2T: "Generador de Claves", p2D: "Crea contraseñas seguras de forma personalizada.",
                 p3T: "Windows 95", p3D: "Recreación nostálgica del sistema operativo clásico.",
                 p4T: "Reloj Retro", p4D: "Reloj digital con estética vintage y nixie."
             },
             cat: {
-                langBtn: "ESPAÑOL",
-                modeDark: "MODE OSCUR",
-                modeLight: "MODE CLAR",
+                home: "Inici", projects: "Projectes", contact: "Contacte",
+                langBtn: "ESPAÑOL", modeDark: "MODE OSCUR", modeLight: "MODE CLAR",
                 heroTitle: "Hola, sóc en Pau.",
-                heroDesc: "Desenvolupador enfocat en crear eines web interactives.",
-                visit: "Visitar lloc",
+                heroDesc: "Desenvolupador enfocat en crear eines web interactives i funcionals.",
+                projectsTitle: "Els meus Projectes", visit: "Visitar lloc",
                 contactTitle: "Parlem?",
-                contactDesc: "No dubtis en contactar amb mi per a qualsevol consulta.",
+                contactDesc: "No dubtis en contactar amb mi per a qualsevol consulta o col·laboració professional.",
                 p1T: "Calculadora", p1D: "Eina de càlcul amb disseny net i mode fosc.",
                 p2T: "Generador de Claus", p2D: "Crea contrasenyes segures de forma personalitzada.",
                 p3T: "Windows 95", p3D: "Recreació nostàlgica del sistema operatiu clàssic.",
@@ -265,19 +267,21 @@
         };
 
         let currentLang = 'es';
-
         const langToggle = document.getElementById('lang-toggle');
         const modeToggle = document.getElementById('mode-toggle');
 
         function updateLanguage() {
             const t = translations[currentLang];
             langToggle.innerText = t.langBtn;
+            document.getElementById('nav-home').innerText = t.home;
+            document.getElementById('nav-projects').innerText = t.projects;
+            document.getElementById('nav-contact').innerText = t.contact;
             document.getElementById('txt-hero-title').innerText = t.heroTitle;
             document.getElementById('txt-hero-desc').innerText = t.heroDesc;
+            document.getElementById('txt-projects-title').innerText = t.projectsTitle;
             document.getElementById('txt-contact-title').innerText = t.contactTitle;
             document.getElementById('txt-contact-desc').innerText = t.contactDesc;
             document.querySelectorAll('.btn-text').forEach(el => el.innerText = t.visit);
-            
             document.getElementById('p1-title').innerText = t.p1T; document.getElementById('p1-desc').innerText = t.p1D;
             document.getElementById('p2-title').innerText = t.p2T; document.getElementById('p2-desc').innerText = t.p2D;
             document.getElementById('p3-title').innerText = t.p3T; document.getElementById('p3-desc').innerText = t.p3D;
@@ -289,14 +293,12 @@
             updateLanguage();
         });
 
-        // TEMA
         modeToggle.addEventListener('click', () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
             document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
             modeToggle.innerText = isDark ? translations[currentLang].modeDark : translations[currentLang].modeLight;
         });
 
-        // IMÁGENES AUTOMÁTICAS
         const projects = [
             { id: 'img-1', url: 'https://pauizel0606.github.io/calculadora/' },
             { id: 'img-2', url: 'https://pauizel0606.github.io/Generador-de-contrasenyes/' },
