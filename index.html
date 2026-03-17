@@ -3,241 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pau Izel | Portfolio High-Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <title>Pau Izel | Portfolio Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #050505;
-            --nav-bg: rgba(10, 10, 10, 0.8);
-            --card-bg: #111111;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --accent: #00f2ff; /* Color Cian Tech */
-            --accent-glow: rgba(0, 242, 255, 0.5);
-            --border: #222222;
-            --shadow: 0 0 20px rgba(0,0,0,0.8);
+            --bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --border: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        [data-theme="light"] {
-            --bg-color: #f0f4f8;
-            --nav-bg: rgba(255, 255, 255, 0.9);
-            --card-bg: #ffffff;
-            --text-main: #1a1a1a;
-            --text-muted: #666666;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.3);
-            --border: #e2e8f0;
+        [data-theme="dark"] {
+            --bg: #030712;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent: #60a5fa;
+            --nav-bg: rgba(3, 7, 18, 0.8);
+            --border: #1f2937;
+            --card-bg: #111827;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            transition: background 0.5s ease;
-        }
 
-        /* --- FONDO DINÁMICO --- */
-        .bg-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), 
-                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(circle at center, black, transparent 80%);
-            opacity: 0.3;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background 0.4s ease;
         }
 
         /* --- NAVEGACIÓN --- */
         nav {
-            background-color: var(--nav-bg);
-            backdrop-filter: blur(15px);
-            padding: 1.2rem 5%;
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 8%;
             display: flex; justify-content: space-between; align-items: center;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
             border-bottom: 1px solid var(--border);
         }
 
-        .logo { 
-            font-family: 'Orbitron', sans-serif; 
-            font-weight: 900; font-size: 1.5rem; 
-            letter-spacing: 2px; color: var(--accent);
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
 
-        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links { display: flex; list-style: none; gap: 40px; }
         .nav-links a { 
             text-decoration: none; color: var(--text-main); 
-            font-weight: 600; font-size: 0.8rem; text-transform: uppercase;
-            letter-spacing: 1px; transition: 0.3s;
+            font-size: 0.9rem; font-weight: 500; transition: color 0.3s;
         }
-        .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+        .nav-links a:hover { color: var(--accent); }
 
-        .btn-control {
-            background: transparent; color: var(--accent);
-            border: 1px solid var(--accent); padding: 6px 15px;
-            border-radius: 4px; cursor: pointer; font-family: 'Orbitron';
-            font-size: 0.7rem; transition: 0.3s;
+        .controls { display: flex; gap: 15px; }
+        .btn-ctrl {
+            background: none; border: 1px solid var(--border);
+            padding: 6px 12px; border-radius: 6px; color: var(--text-main);
+            cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: 0.3s;
         }
-        .btn-control:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
+        .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* --- SECCIONES --- */
-        section { min-height: 100vh; padding: 100px 8%; display: flex; flex-direction: column; justify-content: center; }
-
-        /* --- ANIMACIÓN REVELADO (Estilo ASUS/MSI) --- */
+        /* --- ANIMACIONES DE SCROLL --- */
         .reveal {
             opacity: 0;
-            transform: translateY(50px) scale(0.95);
-            filter: blur(10px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
+            transform: translateY(0);
         }
 
-        /* --- INICIO (HERO) --- */
-        #inicio h1 { 
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem); 
-            line-height: 0.9; margin-bottom: 20px;
-            background: linear-gradient(to bottom, #fff 30%, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* --- SECCIONES --- */
+        section { min-height: 100vh; padding: 120px 10% 60px; }
 
-        /* --- PROYECTOS GRID --- */
-        .projects-grid {
+        /* HERO (INICIO) */
+        #inicio { display: flex; flex-direction: column; justify-content: center; }
+        #inicio h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -2px; margin-bottom: 20px; }
+        #inicio p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; font-weight: 300; }
+
+        /* PROYECTOS (4 POR FILA) */
+        .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            perspective: 1000px;
+            gap: 24px;
+            margin-top: 50px;
         }
 
-        .project-card {
+        .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 12px;
             overflow: hidden;
-            position: relative;
-            transition: 0.5s;
-            transform-style: preserve-3d;
+            transition: all 0.3s ease;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-color: var(--accent); }
 
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            transform: translateX(-100%); transition: 0.5s;
+        .img-box { width: 100%; height: 180px; background: #f3f4f6; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-body { padding: 20px; }
+        .card-body h3 { font-size: 1rem; margin-bottom: 10px; font-weight: 600; }
+        .card-body p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; height: 50px; }
+
+        .btn-link {
+            display: block; text-align: center; background: var(--text-main);
+            color: var(--bg) !important; text-decoration: none; padding: 10px;
+            border-radius: 6px; font-weight: 600; font-size: 0.8rem; transition: 0.3s;
         }
+        .btn-link:hover { opacity: 0.9; }
 
-        .project-card:hover::before { transform: translateX(100%); }
-
-        .project-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-            transform: translateZ(20px) rotateX(5deg) rotateY(-5deg);
+        /* CONTACTO */
+        #contacto { text-align: center; }
+        .contact-box {
+            padding: 80px 40px; border-radius: 20px; background: var(--card-bg);
+            border: 1px solid var(--border); max-width: 800px; margin: 0 auto;
         }
-
-        .project-img-wrapper { height: 150px; background: #000; overflow: hidden; position: relative; }
-        .project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
-        .project-card:hover img { opacity: 1; transform: scale(1.1); }
-
-        .project-body { padding: 20px; }
-        .project-body h3 { font-family: 'Orbitron'; font-size: 0.9rem; margin-bottom: 10px; color: var(--accent); }
-        .project-body p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px; height: 40px; }
-
-        .btn-visit {
-            display: block; text-align: center;
-            background: var(--accent); color: #000 !important;
-            text-decoration: none; padding: 10px; font-weight: 900;
-            font-size: 0.7rem; text-transform: uppercase; font-family: 'Orbitron';
+        .email { 
+            font-size: clamp(1.2rem, 4vw, 2.5rem); font-weight: 700; 
+            color: var(--accent); text-decoration: none; word-break: break-all;
         }
-
-        /* --- CONTACTO --- */
-        .contact-card {
-            border: 1px solid var(--border);
-            padding: 80px; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .email-link {
-            font-family: 'Orbitron'; font-size: clamp(1rem, 5vw, 2.5rem);
-            color: var(--text-main); text-decoration: none; transition: 0.3s;
-        }
-        .email-link:hover { color: var(--accent); text-shadow: 0 0 20px var(--accent); }
 
         /* RESPONSIVE */
-        @media (max-width: 1200px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { 
-            .projects-grid { grid-template-columns: 1fr; }
-            nav { padding: 1rem; }
+            .grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+            section { padding: 100px 5% 40px; }
         }
     </style>
 </head>
-<body data-theme="dark">
-
-    <div class="bg-grid"></div>
+<body data-theme="light">
 
     <nav>
-        <div class="logo">PAU_IZEL_OS</div>
-        <div style="display: flex; gap: 15px;">
-            <ul class="nav-links">
-                <li><a href="#inicio" id="nav-home">Inicio</a></li>
-                <li><a href="#proyectos" id="nav-projects">Proyectos</a></li>
-                <li><a href="#contacto" id="nav-contact">Contacto</a></li>
-            </ul>
-            <button class="btn-control" id="lang-toggle">CATALÀ</button>
-            <button class="btn-control" id="mode-toggle">TEMA</button>
+        <div class="logo">PAU IZEL</div>
+        <ul class="nav-links">
+            <li><a href="#inicio" id="nav-home">Inicio</a></li>
+            <li><a href="#proyectos" id="nav-projects">Proyectos</a></li>
+            <li><a href="#contacto" id="nav-contact">Contacto</a></li>
+        </ul>
+        <div class="controls">
+            <button class="btn-ctrl" id="lang-toggle">CATALÀ</button>
+            <button class="btn-ctrl" id="mode-toggle">TEMA</button>
         </div>
     </nav>
 
     <section id="inicio" class="reveal">
-        <h1 id="txt-hero-title">ENGINEERING<br>THE FUTURE</h1>
-        <p id="txt-hero-desc">Pau Izel: Desarrollador de interfaces de alto rendimiento y herramientas interactivas.</p>
+        <h1 id="txt-hero-title">Desarrollo web con enfoque en resultados.</h1>
+        <p id="txt-hero-desc">Soy Pau Izel. Construyo soluciones digitales eficientes, escalables y con un diseño impecable.</p>
     </section>
 
     <section id="proyectos">
-        <h2 class="section-title reveal" id="txt-projects-title" style="font-family: 'Orbitron'; margin-bottom: 60px;">// SYSTEM_PROYECTOS</h2>
-        <div class="projects-grid">
+        <h2 id="txt-projects-title" style="font-size: 2rem; margin-bottom: 10px;">Proyectos Seleccionados</h2>
+        <div class="grid">
             
-            <article class="project-card reveal">
-                <div class="project-img-wrapper"><img id="img-1" src="" alt="Calculadora"></div>
-                <div class="project-body">
-                    <h3 id="p1-title">CALC_UNIT_V1</h3>
-                    <p id="p1-desc">Motor de cálculo optimizado con interfaz minimalista.</p>
-                    <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-visit btn-text">Ejecutar</a>
+            <article class="card reveal">
+                <div class="img-box"><img id="img-1" src="" alt="Calculadora"></div>
+                <div class="card-body">
+                    <h3 id="p1-title">Calculadora</h3>
+                    <p id="p1-desc">Aplicación de cálculo avanzado con interfaz intuitiva.</p>
+                    <a href="https://pauizel0606.github.io/calculadora/" target="_blank" class="btn-link btn-text">Ver proyecto</a>
                 </div>
             </article>
 
-            <article class="project-card reveal">
-                <div class="project-img-wrapper"><img id="img-2" src="" alt="Password"></div>
-                <div class="project-body">
-                    <h3 id="p2-title">KEY_GEN_SECURE</h3>
-                    <p id="p2-desc">Algoritmo de generación de cifrado personalizado.</p>
-                    <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-visit btn-text">Ejecutar</a>
+            <article class="card reveal">
+                <div class="img-box"><img id="img-2" src="" alt="Password"></div>
+                <div class="card-body">
+                    <h3 id="p2-title">Generador de Claves</h3>
+                    <p id="p2-desc">Sistema de seguridad para gestión de credenciales.</p>
+                    <a href="https://pauizel0606.github.io/Generador-de-contrasenyes/" target="_blank" class="btn-link btn-text">Ver proyecto</a>
                 </div>
             </article>
 
-            <article class="project-card reveal">
-                <div class="project-img-wrapper"><img id="img-3" src="" alt="Windows 95"></div>
-                <div class="project-body">
-                    <h3 id="p3-title">LEGACY_OS_95</h3>
-                    <p id="p3-desc">Virtualización estética del sistema operativo clásico.</p>
-                    <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-visit btn-text">Ejecutar</a>
+            <article class="card reveal">
+                <div class="img-box"><img id="img-3" src="" alt="Windows 95"></div>
+                <div class="card-body">
+                    <h3 id="p3-title">Windows 95</h3>
+                    <p id="p3-desc">Exploración de interfaces históricas mediante web tech.</p>
+                    <a href="https://pauizel0606.github.io/Windows95/" target="_blank" class="btn-link btn-text">Ver proyecto</a>
                 </div>
             </article>
 
-            <article class="project-card reveal">
-                <div class="project-img-wrapper"><img id="img-4" src="" alt="Reloj"></div>
-                <div class="project-body">
-                    <h3 id="p4-title">CHRONO_RETRO</h3>
-                    <p id="p4-desc">Sincronización de tiempo con estética Nixie/Vintage.</p>
-                    <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-visit btn-text">Ejecutar</a>
+            <article class="card reveal">
+                <div class="img-box"><img id="img-4" src="" alt="Reloj"></div>
+                <div class="card-body">
+                    <h3 id="p4-title">Reloj Retro</h3>
+                    <p id="p4-desc">Visualización de tiempo con estética vintage.</p>
+                    <a href="https://pauizel0606.github.io/Rellotge-retro/" target="_blank" class="btn-link btn-text">Ver proyecto</a>
                 </div>
             </article>
 
@@ -245,78 +201,84 @@
     </section>
 
     <section id="contacto" class="reveal">
-        <div class="contact-card">
-            <h2 id="txt-contact-title" style="font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 5px; margin-bottom: 20px;">ESTABLECER CONEXIÓN</h2>
-            <a href="mailto:pauizel0606@gmail.com" class="email-link">PAUIZEL0606@GMAIL.COM</a>
+        <div class="contact-box">
+            <h2 id="txt-contact-title" style="margin-bottom: 20px;">¿Tienes un proyecto en mente?</h2>
+            <p id="txt-contact-desc" style="color: var(--text-muted); margin-bottom: 40px;">Hablemos sobre cómo puedo ayudarte a cumplir tus objetivos tecnológicos.</p>
+            <a href="mailto:pauizel0606@gmail.com" class="email">pauizel0606@gmail.com</a>
         </div>
     </section>
 
     <script>
-        // --- ANIMACIÓN DE SCROLL (Intersection Observer) ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
         // --- TRADUCCIONES ---
         const translations = {
             es: {
                 home: "Inicio", projects: "Proyectos", contact: "Contacto",
-                langBtn: "CATALÀ", heroTitle: "ENGINEERING<br>THE FUTURE",
-                heroDesc: "Pau Izel: Desarrollador de interfaces de alto rendimiento.",
-                projectsTitle: "// SYSTEM_PROYECTOS", visit: "Ejecutar",
-                contactTitle: "ESTABLECER CONEXIÓN",
-                p1T: "CALC_UNIT_V1", p1D: "Motor de cálculo optimizado.",
-                p2T: "KEY_GEN_SECURE", p2D: "Generación de cifrado personalizado.",
-                p3T: "LEGACY_OS_95", p3D: "Virtualización estética de sistema clásico.",
-                p4T: "CHRONO_RETRO", p4D: "Sincronización de tiempo estética Nixie."
+                langBtn: "CATALÀ", heroTitle: "Desarrollo web con enfoque en resultados.",
+                heroDesc: "Soy Pau Izel. Construyo soluciones digitales eficientes, escalables y con un diseño impecable.",
+                projectsTitle: "Proyectos Seleccionados", visit: "Ver proyecto",
+                contactTitle: "¿Tienes un proyecto en mente?",
+                contactDesc: "Hablemos sobre cómo puedo ayudarte a cumplir tus objetivos tecnológicos.",
+                p1T: "Calculadora", p1D: "Aplicación de cálculo avanzado con interfaz intuitiva.",
+                p2T: "Generador de Claves", p2D: "Sistema de seguridad para gestión de credenciales.",
+                p3T: "Windows 95", p3D: "Exploración de interfaces históricas mediante web tech.",
+                p4T: "Reloj Retro", p4D: "Visualización de tiempo con estética vintage."
             },
             cat: {
                 home: "Inici", projects: "Projectes", contact: "Contacte",
-                langBtn: "ESPAÑOL", heroTitle: "ENGINYERIA<br>DEL FUTUR",
-                heroDesc: "Pau Izel: Desenvolupador d'interfícies d'alt rendiment.",
-                projectsTitle: "// SYSTEM_PROJECTES", visit: "Executar",
-                contactTitle: "ESTABLIR CONNEXIÓ",
-                p1T: "CALC_UNIT_V1", p1D: "Motor de càlcul optimitzat.",
-                p2T: "KEY_GEN_SECURE", p2D: "Generació de xifrat personalitzat.",
-                p3T: "LEGACY_OS_95", p3D: "Virtualització estètica de sistema clàssic.",
-                p4T: "CHRONO_RETRO", p4D: "Sincronització de temps estètica Nixie."
+                langBtn: "ESPAÑOL", heroTitle: "Desenvolupament web amb enfocament en resultats.",
+                heroDesc: "Sóc en Pau Izel. Construeixo solucions digitals eficients, escalables i amb un disseny impecable.",
+                projectsTitle: "Projectes Seleccionats", visit: "Veure projecte",
+                contactTitle: "Tens un projecte en ment?",
+                contactDesc: "Parlem sobre com puc ajudar-te a complir els teus objectius tecnològics.",
+                p1T: "Calculadora", p1D: "Aplicació de càlcul avançat amb interfície intuïtiva.",
+                p2T: "Generador de Claus", p2D: "Sistema de seguretat per a gestió de credencials.",
+                p3T: "Windows 95", p3D: "Exploració d'interfícies històriques mitjançant web tech.",
+                p4T: "Rellotge Retro", p4D: "Visualització de temps amb estètica vintage."
             }
         };
 
         let currentLang = 'es';
-        const langToggle = document.getElementById('lang-toggle');
-
-        langToggle.addEventListener('click', () => {
-            currentLang = currentLang === 'es' ? 'cat' : 'es';
+        
+        function updateUI() {
             const t = translations[currentLang];
-            langToggle.innerText = t.langBtn;
+            document.getElementById('lang-toggle').innerText = t.langBtn;
             document.getElementById('nav-home').innerText = t.home;
             document.getElementById('nav-projects').innerText = t.projects;
             document.getElementById('nav-contact').innerText = t.contact;
-            document.getElementById('txt-hero-title').innerHTML = t.heroTitle;
+            document.getElementById('txt-hero-title').innerText = t.heroTitle;
             document.getElementById('txt-hero-desc').innerText = t.heroDesc;
             document.getElementById('txt-projects-title').innerText = t.projectsTitle;
             document.getElementById('txt-contact-title').innerText = t.contactTitle;
+            document.getElementById('txt-contact-desc').innerText = t.contactDesc;
             document.querySelectorAll('.btn-text').forEach(el => el.innerText = t.visit);
             document.getElementById('p1-title').innerText = t.p1T; document.getElementById('p1-desc').innerText = t.p1D;
             document.getElementById('p2-title').innerText = t.p2T; document.getElementById('p2-desc').innerText = t.p2D;
             document.getElementById('p3-title').innerText = t.p3T; document.getElementById('p3-desc').innerText = t.p3D;
             document.getElementById('p4-title').innerText = t.p4T; document.getElementById('p4-desc').innerText = t.p4D;
+        }
+
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            currentLang = currentLang === 'es' ? 'cat' : 'es';
+            updateUI();
         });
 
-        // TEMA
+        // --- MODO OSCURO ---
         document.getElementById('mode-toggle').addEventListener('click', () => {
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            const body = document.body;
+            const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
         });
 
-        // IMÁGENES
+        // --- ANIMACIONES AL HACER SCROLL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- IMÁGENES AUTOMÁTICAS ---
         const projects = [
             { id: 'img-1', url: 'https://pauizel0606.github.io/calculadora/' },
             { id: 'img-2', url: 'https://pauizel0606.github.io/Generador-de-contrasenyes/' },
